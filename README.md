@@ -77,10 +77,10 @@ The next step is to register an end device in an application. To do so:
 2. Fill in the below information for the AB02S:
 
 <p align="center">
-	<img src="documentation_images/registration.png">
+	<img src="documentation_images/registration.png" width = "400">
 </p>
 
-Depending on what brand or model that you use, the information may need to be different. But make sure you select your model with (Class A - OTAA), as is done in the image above. This is because end devices should be configured as Class A to reduce power draw, and OTAA communication should be used because it is more secure than ABP. More on [LoRaWAN classes](https://www.thethingsnetwork.org/docs/lorawan/classes/) and [communication types](https://www.thethingsnetwork.org/forum/t/what-is-the-difference-between-otaa-and-abp-devices/2723).
+	Depending on what brand or model that you use, the information may need to be different. But make 	sure you select your model with (Class A - OTAA), as is done in the image above. This is because 	end devices should be configured as Class A to reduce power draw, and OTAA communication should be 	used because it is more secure than ABP. More on [LoRaWAN classes]	(https://www.thethingsnetwork.org/docs/lorawan/classes/) and [communication types]	(https://www.thethingsnetwork.org/forum/t/what-is-the-difference-between-otaa-and-abp-	devices/2723).
 
 3. Input all 0's for the JoinEUI
 
@@ -142,6 +142,15 @@ function Decoder(bytes) {
 }
 ```
 
+The combination of a ThingSpeak webhook and the returning of fields in the payload formatter ensures that data is sent to the ThingSpeak channel that is specified in the TTN "Integrations" tab. In our payload formatter, the longitude of the end node is sent to a ThingSpeak channel's field 1, the latitude is sent to field 2, the emergency status is sent to field 3, the battery voltage (V) is sent to field 4, and the message code is sent to field 5. These fields then show up on the ThingSpeak channel, as seen in the figures below.
+
+<p align="center">
+	<img src="documentation_images/payload.png" width = "200">
+</p>
+
+<p align="center">
+	<img src="documentation_images/thingspeak.png" width = "200">
+</p>
 
 
 <!-- Operation -->
