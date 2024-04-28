@@ -2,7 +2,7 @@
 
 ## Dependencies
 
-![](documentation_images/heltec.png)
+<img src="documentation_images/heltec.png" width="400">
 
 Our end nodes are controlled by Heltec CubeCell (ASR-650X) Development Boards, specifically the [AB02S](https://resource.heltec.cn/download/CubeCell/HTCC-AB02S). Heltec has created Arduino Frameworks for their development boards that simplifies establishing LoRaWAN communication and programming additional functionalities. To program the boards:
 
