@@ -17,11 +17,11 @@ The hardware is composed of two primary subsystems: the Heltec [AB02S developmem
 The PCB was designed in Altium and is in the "LoRaWAN Senior Project" folder in this repository. Additionally, a bill of materials was created. The schematic and PCB can be seen below.
 
 <p align="center">
-	<img src="documentation_images/schematic.png" width="500">
+	<img src="documentation_images/schematic.png" width="900">
 </p>
 
 <p align="center">
-	<img src="documentation_images/pcb.png" width="500">
+	<img src="documentation_images/pcb.png" width="900">
 </p>
 
 ## End Node
@@ -29,10 +29,10 @@ The PCB was designed in Altium and is in the "LoRaWAN Senior Project" folder in 
 Pictures of the end node can be seen below. The emergency (red), select/BLE (blue), and toggle (green) buttons are embedded in the waterproof box.
 
 <p align="center">
-	<img src="documentation_images/pcb_overview.png" width="500">
+	<img src="documentation_images/pcb_overview.png">
 </p>
 
 <p align="center">
-	<img src="documentation_images/node.png" width="500">
+	<img src="documentation_images/node.png">
 </p>
 
