@@ -145,11 +145,11 @@ function Decoder(bytes) {
 The combination of a ThingSpeak webhook and the returning of fields in the payload formatter ensures that data is sent to the ThingSpeak channel that is specified in the TTN "Integrations" tab. In our payload formatter, the longitude of the end node is sent to a ThingSpeak channel's field 1, the latitude is sent to field 2, the emergency status is sent to field 3, the battery voltage (V) is sent to field 4, and the message code is sent to field 5. These fields then show up on the ThingSpeak channel, as seen in the figures below.
 
 <p align="center">
-	<img src="documentation_images/payload.png" width = "200">
+	<img src="documentation_images/payload.png">
 </p>
 
 <p align="center">
-	<img src="documentation_images/thingspeak.png" width = "200">
+	<img src="documentation_images/thingspeak.png">
 </p>
 
 
