@@ -1,6 +1,6 @@
 # Python GUI Application
 
-![](LoRaWAN-Team/documentation_images/GUI.png)
+![](documentation_images/GUI.png)
 
 ## Dependencies
 
