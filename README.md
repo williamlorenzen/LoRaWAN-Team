@@ -80,7 +80,7 @@ The next step is to register an end device in an application. To do so:
 	<img src="documentation_images/registration.png" width = "400">
 </p>
 
-	Depending on what brand or model that you use, the information may need to be different. But make 	sure you select your model with (Class A - OTAA), as is done in the image above. This is because 	end devices should be configured as Class A to reduce power draw, and OTAA communication should be 	used because it is more secure than ABP. More on [LoRaWAN classes]	(https://www.thethingsnetwork.org/docs/lorawan/classes/) and [communication types]	(https://www.thethingsnetwork.org/forum/t/what-is-the-difference-between-otaa-and-abp-	devices/2723).
+Depending on what brand or model that you use, the information may need to be different. But make sure you select your model with (Class A - OTAA), as is done in the image above. This is because end devices should be configured as Class A to reduce power draw, and OTAA communication should be used because it is more secure than ABP. More on [LoRaWAN classes](https://www.thethingsnetwork.org/docs/lorawan/classes/) and [communication types](https://www.thethingsnetwork.org/forum/t/what-is-the-difference-between-otaa-and-abp-devices/2723).
 
 3. Input all 0's for the JoinEUI
 
@@ -145,11 +145,11 @@ function Decoder(bytes) {
 The combination of a ThingSpeak webhook and the returning of fields in the payload formatter ensures that data is sent to the ThingSpeak channel that is specified in the TTN "Integrations" tab. In our payload formatter, the longitude of the end node is sent to a ThingSpeak channel's field 1, the latitude is sent to field 2, the emergency status is sent to field 3, the battery voltage (V) is sent to field 4, and the message code is sent to field 5. These fields then show up on the ThingSpeak channel, as seen in the figures below.
 
 <p align="center">
-	<img src="documentation_images/payload.png" width = "250">
+	<img src="documentation_images/payload.png" width = "350">
 </p>
 
 <p align="center">
-	<img src="documentation_images/thingspeak.png" width = "250">
+	<img src="documentation_images/thingspeak.png" width = "350">
 </p>
 
 With that, an end node can be been configured on TTN. When a new end node is being added to the system, a new application will have to be created, the end device registered, the relevant Javascript formatter code pasted into into payload formatter, a new ThingSpeak channel created, and the webhook to the new channel established.
@@ -157,13 +157,18 @@ With that, an end node can be been configured on TTN. When a new end node is bei
 <!-- Gateway -->
 ## Gateway
 
+<p align="center">
+	<img src="documentation_images/gateway.jpg" width = "350">
+</p>
+
 The SX1303 Raspberry Pi gateway has already been fully setup and initialized on TTN. To connect the end nodes to TTN, the gateway needs to be connected to the server as well, which is done by powering up the gateway and running its packet forwarder. 
 
 There are two options for connecting the gateway to the server:
 1. SSHing in
 2. Starting the packet forwarder directly on the Raspberry Pi
 
-Option 1:
+
+### Option 1:
 1. Connect the gateway and your computer to the same WiFi network. You cannot use eduroam on the gateway, so you will either need to use your hotspot, or connect to the wifi that Dr.Eisenstadt has setup in NEB212. If you are using your hotspot, the gateway will not automatically join the first time, so you will need to directly startup the Raspberry Pi and connect to your WiFi hotspot manually, like in Option 2, so that the gateway knows your hotspot. Upon future bootups, the gateway will automatically connect to your hotspot.
 2. Once the gateway and your computer are on the same Wifi, open up "command prompt" on your computer.
 3. Paste:
@@ -188,7 +193,7 @@ Option 1:
 	sudo ./lora_pkt_fwd -c test_conf
 	```
 
-Option 2:
+### Option 2:
 1. Connect an HDMI connector to the gateway and a monitor. Connect a mouse and keybord to the gateway.
 2. Manually connect to your hotspot or other WiFi (not eduroam) on the Raspberry Pi.
 3. Open up command prompt on the Raspberry Pi.
