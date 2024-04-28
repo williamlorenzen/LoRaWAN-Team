@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/williamlorenzen/LoRaWAN-Team">
+  <a href="https://github.com/williamlorenzen/LoRaWAN-Team" height="100">
     <img src="documentation_images/IoT.jpg" alt="Logo">
   </a>
 
