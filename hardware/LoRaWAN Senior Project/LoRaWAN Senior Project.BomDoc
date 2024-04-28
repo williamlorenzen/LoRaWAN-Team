@@ -1,0 +1,19 @@
+|RECORD=BOM|VERSION=3|FILENAME=C:\Users\Public\Documents\Altium\LoRaWAN Senior Project\LoRaWAN Senior Project.$$$|KIND=ALTIUM_DESIGNER_LIVEBOM|DATE=22.01.2024|TIME=04:40:20|CURRENCY=USD|PRODUCTIONQUANTITY=1|PERUNITTARGETPRICE=0|PERUNITACTUALPRICE=0
+|RECORD=GeneralOptions|OPENEXPORTED=False|ADDTOPROJECT=False|FORCEFIT=False|NOTFITTED=False|TEMPLATEFILENAME=|BATCHMODE=0|SUPPLIERPRODQTY=0|SUPPLIERAUTOQTY=False|SUPPLIERUSECACHEDPRICING=False|SUPPLIERCURRENCY=|SOLUTIONSPERITEM=1|SUPPLIERSPERSOLUTION=1|DISPLAYTOTALROW=False|DISPLAYSUBTOTALSFORGROUPS=False|INCLUDEPCBPARAMETERS=False|INCLUDEDBPARAMETERS=False|INCLUDEVAULTPARAMETERS=False|INCLUDECLOUDPARAMETERS=False|INCLUDEDOCUMENTPARAMETERS=False|FILTEROUTRISKYSOLUTIONS=True|DESIGNATORGROUPING=No
+|RECORD=SortOrderOptions|SORTORDER=
+|RECORD=GroupOrderOptions|GROUPORDER=
+|RECORD=VisibleOrderOptions|VISIBLEORDER=Line #=53!Comment=69!Description=78!Designator=77!Revision ID=78!Revision State=91!Revision Status=97!Quantity=66!Manufacturer 1=99!Manufacturer Part Number 1=166!Manufacturer Lifecycle 1=142!Supplier 1=72!Supplier Part Number 1=138!Supplier Unit Price 1=122!Supplier Subtotal 1=116
+|RECORD=VisibleOrderOptions2|BASEVIEW=Line #=53!Comment=69!Description=78!Designator=77!Revision ID=78!Revision State=91!Revision Status=97!Quantity=66!Manufacturer 1=99!Manufacturer Part Number 1=166!Manufacturer Lifecycle 1=142!Supplier 1=72!Supplier Part Number 1=138!Supplier Unit Price 1=122!Supplier Subtotal 1=116|FLATVIEW=Line #=-1!Comment=-1!Description=-1!Designator=-1!Revision ID=-1!Revision State=-1!Revision Status=-1!Manufacturer 1=99!Manufacturer Part Number 1=166!Manufacturer Lifecycle 1=142!Supplier 1=72!Supplier Part Number 1=138!Supplier Unit Price 1=122!Supplier Subtotal 1=116|CONSOLIDATEDVIEW=Line #=-1!Comment=-1!Description=-1!Designator=-1!Revision ID=-1!Revision State=-1!Revision Status=-1!Quantity=-1!Manufacturer 1=99!Manufacturer Part Number 1=166!Manufacturer Lifecycle 1=142!Supplier 1=72!Supplier Part Number 1=138!Supplier Unit Price 1=122!Supplier Subtotal 1=116
+|RECORD=CustomColumns|CUSTOMCOLUMNS=
+|RECORD=ColumnsAliases|COLUMNSALIASES=Comment=Name
+|RECORD=FilterOptions|FILTER=
+|RECORD=CheckGroupCompParamsOptions|CHECKGROUPCOMPPARAMS=Comment=0,Description=0,Value=0,Footprint=1
+|RECORD=ManufacturerLinkOptions|MANUFACTURERLINKPARAMETERS=
+|RECORD=FavoriteSuppliers|PARTSOURCES=|SUPPLIERS=|USESUPPLIERORDER=False
+|RECORD=CheckOptions|CHECKLEVELS=
+|RECORD=LineNumberingOptions|STARTVALUE=|INCREMENT=
+|RECORD=Catalog|DBLINKFILEPATH=
+|RECORD=CatalogItem|ITEMTYPE=Automatic-NonVault|UNIQUEID=Senior Design SCHLIB.SchLib\Photon 2|DESIGNITEMID=Photon 2|ITEMSOURCE=Senior Design SCHLIB.SchLib|STATUS=Unknown|DESCRIPTION=Particle Photon 2 IoT Development Board|USERCOMMENTS=Photon 2|NOTE=|LINENUMBER=|SELECTEDPARAMETERSHASH=,"Photon 2"|COMPONENTPARAMETERS="Comment=Photon 2","Component Kind=Standard",Description=,Footprint=PCBComponent_1,"Ibis Model=","Library Name=Senior Design SCHLIB.SchLib","Library Reference=Photon 2",PCB3D=,"Pin Info=","Signal Integrity=",Simulation=|CUSTOMPARAMETERS=
+|RECORD=ManufacturerLink|MANUFACTURER=Particle|MPN=PHN2MEA
+|RECORD=PartChoice|PARTCHOICETYPE=AUTO_SCHLINKS|SUPPLIERSOURCE=Ciiva|MANUFACTURER=Particle|MANUFACTURERALIASES=PARTICLE INDUSTRIES|MANUFACTURERPARTNO=PHN2MEA|CIIVAID=10004627259|SUPPLIER=|SUPPLIERPARTNO=|PROVIDERNAME=Ciiva|PROVIDERGUID=7A819525-F41E-4ADC-9CD0-9D9FA8B5FCE8|DESCRIPTION=|RANK=3|AVAILABLEQUANTITY=0|BESTUNITPRICE=0|CURRENCY=|ORIGINALCURRENCY=|SUPPLIERURL=|PRODUCTPHOTOURL=|MANUFACTURERPACKAGING=|SUPPLIERPACKAGING=|DATASHEETS=|LASTUPDATED=|PRICECOUNT=0
+|RECORD=PartChoiceGroups|GROUPBYFIELDCOUNT=0
