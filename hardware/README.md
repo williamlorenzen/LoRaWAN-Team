@@ -2,7 +2,7 @@
 
 ## System Overview
 
-The hardware is composed of two primary subsystems: the Heltec [AB02S developmemnt board](https://heltec.org/project/htcc-ab02s/) and the [Adafruit Bluetooth Low Energy UART module](https://learn.adafruit.com/introducing-the-adafruit-bluefruit-le-uart-friend/introduction). The Heltec controls much of the system's functionality, containing the ASR650x MCU (a combination of the PSoC4000 microcontroller and the SX1262 LoRa transceiver) that dictates the end node's operation. Both modules operate on an Arduino framework, allowing for easier integration. We designed a PCB that joins these boards together and integrates the system's other peripherals, including its three buttons, status LED, female header expansion pins, and power switch. The end node is powered by a 5V Miady battery and is enclosed in a waterproof polycarbonate box.
+The hardware is composed of two primary subsystems: the Heltec [AB02S development board](https://heltec.org/project/htcc-ab02s/) and the [Adafruit Bluetooth Low Energy UART module](https://learn.adafruit.com/introducing-the-adafruit-bluefruit-le-uart-friend/introduction). The Heltec controls much of the system's functionality, containing the ASR650x MCU (a combination of the PSoC4000 microcontroller and the SX1262 LoRa transceiver) that dictates the end node's operation. Both modules operate on an Arduino framework, allowing for easier integration. We designed a PCB that joins these boards together and integrates the system's other peripherals, including its three buttons, status LED, female header expansion pins, and power switch. The end node is powered by a 5V Miady battery and is enclosed in a waterproof polycarbonate box.
 
 - Power Switch - turns the end node on
 - Three Buttons:
