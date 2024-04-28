@@ -18,7 +18,7 @@ Our end nodes are controlled by Heltec CubeCell (ASR-650X) Development Boards, s
 
 7. Ensure the correct LoRaWAN settings under "Tools," as shown below.
 
-![](documentation_images/Settings.png | width=100)
+<img src="documentation_images/Settings.png" width="600">
 
 
 You are now ready to program various AB02S boards with our program and change it according to your project's goals.
