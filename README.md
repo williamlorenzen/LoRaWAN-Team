@@ -42,7 +42,7 @@ Given the limitations of conventional wireless communications like cellular and 
 ## System Architecture
 
 <p align="center">
-	<img src="documentation_images/architecture.jpg" height="600">
+	<img src="documentation_images/architecture.png" height="600">
 </p>
 
 
