@@ -5,11 +5,12 @@
     <img src="documentation_images/IoT.jpg" alt="Logo" height="100">
   </a>
 
-  <h2 align="center" style="font-size: 36px;">LoRaWAN Asset Tracker and Emergency Button</h2>
+  <h2 align="center" style="font-size: 48px;">LoRaWAN Asset Tracker and Emergency Button</h2>
 
-  <p align="center" style="font-size: 24px;">
+  <p align="center" style="font-size: 32px;">
     Spring 2024 LoRaWAN Team
     <br />
+    <span style="font-size: 28px;">William Lorenzen, Maria Barrera, Justin Nagovskiy</span>
   </p>
 </p>
 
