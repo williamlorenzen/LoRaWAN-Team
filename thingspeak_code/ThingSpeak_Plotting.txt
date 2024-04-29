@@ -1,0 +1,121 @@
+% needs to be changed according to each channel
+readChannelID = 2496188;
+readAPIKey = 'AULIMJPG0NVLWAV2';
+
+% needs to be changed according to each channel
+writeChannelID = 2496188;
+writeAPIKey = 'L9GAPRI37PO7UX9P';
+
+% gets current date
+currentDate = datetime("today");
+currentDateNum = convertTo(currentDate,'yyyymmdd');
+
+% formats current date into usable information
+dgt  = num2str(currentDateNum)-'0';
+year = dgt(1)*1000+dgt(2)*100+dgt(3)*10+dgt(4);
+month = dgt(5)*10+dgt(6);
+day = dgt(7)*10+dgt(8);
+
+% Used for testing
+%day=25;
+
+% creating polygon matrices that represent different fields
+polygon1 = [30.545141, -84.592754;
+            30.546763, -84.592213;
+            30.548173, -84.591980;
+            30.548725, -84.591918;
+            30.548762, -84.585353;
+            30.541474, -84.585382;
+            30.541467, -84.588913;
+            30.544930, -84.588956;
+            30.545082, -84.589136;
+            30.545099, -84.592749];
+polygon2 = [30.548784, -84.601543;
+            30.552184, -84.601543;
+            30.552461, -84.595041;
+            30.549874, -84.594655;
+            30.549191, -84.597895];
+polygon3 = [30.541573, -84.594451;
+            30.543181, -84.598249;
+            30.543661, -84.602927;
+            30.548059, -84.601168;
+            30.548725, -84.592327;
+            30.545010, -84.593100];
+
+% creating polygon matrix that represents site perimeter
+god_polygon = [30.552581, -84.602294;
+               30.552525, -84.592639;
+               30.549236, -84.592703;
+               30.549051, -84.584573;
+               30.541400, -84.584486;
+               30.541419, -84.603562];
+
+% Reads the longitude and latitude on the current day of the Channel that is specified 
+data1 = thingSpeakRead(readChannelID, 'ReadKey', readAPIKey, 'Fields', [1, 2], DateRange=[datetime(year,month,day,0,0,1),datetime(year,month,day,23,59,59)]);
+
+% empty matrix used to track number of GPS points within each polygon/field
+data_poly_matrix = zeros(2,4);
+
+% stops MATLAB error if array is empty
+data1(data1 == 0) = [];
+if size(data1,1)==1
+    data1 = reshape(data1, [size(data1,2)/2,2]);
+end
+
+%loop for data1 that checks the amount of recorded GPS coordinates that 
+% are within each preconfiguredpolygon
+for i=1:1:size(data1,1)
+    if inpolygon(data1(i,2), data1(i,1), polygon1(:,1), polygon1(:,2))
+        data_poly_matrix(1,1) = data_poly_matrix(1,1) + 1;
+    end
+    if inpolygon(data1(i,2), data1(i,1), polygon2(:,1), polygon2(:,2))
+        data_poly_matrix(1,2) = data_poly_matrix(1,2) + 1;
+    end
+    if inpolygon(data1(i,2), data1(i,1), polygon3(:,1), polygon3(:,2))
+        data_poly_matrix(1,3) = data_poly_matrix(1,3) + 1;
+    end
+    if inpolygon(data1(i,2), data1(i,1), god_polygon(:,1), god_polygon(:,2))
+        data_poly_matrix(1,4) = data_poly_matrix(1,4) + 1;
+    end
+end
+
+% if the number of GPS coordinates sent by end node does not equal the amount of GPS coordinates
+% within the perimeter of the site, then field 6 of the end node's channel is set to 1,
+% which triggers an alert
+% this "Boundary" functionality was not full realized, but the alert infrastructure and GUI functionality
+% are in place
+if data_poly_matrix(1,4)~=size(data1,1)
+    %thingSpeakWrite(writeChannelID, 1,'Fields',6, 'WriteKey', writeAPIKey)
+    disp("Out of Bounds!")
+    fprintf('Number of recorded data points for the device within the site is %d.\n', data_poly_matrix(1,4))
+    fprintf('The total number of datapoints %d.\n\n', size(data1,1))
+else
+    %thingSpeakWrite(writeChannelID, 0,'Fields',6, 'WriteKey', writeAPIKey)
+end
+
+% plots polygon1 on the map
+geoplot([polygon1(:,1); polygon1(1,1)],[polygon1(:,2); polygon1(1,2)], "k--", Color='r')
+hold on
+% plots polygon2 on the map
+geoplot([polygon2(:,1); polygon2(1,1)],[polygon2(:,2); polygon2(1,2)], "k--", Color='c')
+hold on
+% plots polygon3 on the map
+geoplot([polygon3(:,1); polygon3(1,1)],[polygon3(:,2); polygon3(1,2)], "k--", Color='b')
+hold on
+% plots site perimeter on the map
+geoplot([god_polygon(:,1); god_polygon(1,1)],[god_polygon(:,2); god_polygon(1,2)], "k-", Color='w')
+hold on
+
+% plots GPS locations of end node over time on map
+if isempty(data1)==0
+    geoplot([data1(:,2)], [data1(:,1)], Marker='o', Color='r', MarkerFaceColor='r', LineWidth = 1);
+end
+
+% sets limits of the map that is displayed
+geolimits([30.539319, 30.554016], [-84.605184, -84.583052]); %[latitudeLimits, longitudeLimits]
+geobasemap satellite
+
+% prints useful information
+fprintf('Number of recorded data points within for Device 1 in field 1 is %d.\n', data_poly_matrix(1,1))
+fprintf('Number of recorded data points within for Device 1 in field 2 is %d.\n', data_poly_matrix(1,2))
+fprintf('Number of recorded data points within for Device 1 in field 3 is %d.\n', data_poly_matrix(1,3))

@@ -1,0 +1,80 @@
+% Channel IDs and ReadAPI Keys
+dev_1_channel_ID = 2496188;
+dev_1_readAPIKey = 'AULIMJPG0NVLWAV2';
+dev_2_channel_ID = 2496183;
+dev_2_readAPIKey = 'I8M5KXAOB5HGFOSF';
+dev_3_channel_ID = 2496176;
+dev_3_readAPIKey = '59BCXLAT847IYIB3';
+
+% Read emergency button field
+dev_1_emergency = thingSpeakRead(dev_1_channel_ID, 'ReadKey', dev_1_readAPIKey, 'Fields', [3]);
+dev_2_emergency = thingSpeakRead(dev_2_channel_ID, 'ReadKey', dev_2_readAPIKey, 'Fields', [3]);
+dev_3_emergency = thingSpeakRead(dev_3_channel_ID, 'ReadKey', dev_3_readAPIKey, 'Fields', [3]);
+
+% Read out of bounds field
+dev_1_bounds = thingSpeakRead(dev_1_channel_ID, 'ReadKey', dev_1_readAPIKey, 'Fields', [6]);
+dev_2_bounds = thingSpeakRead(dev_2_channel_ID, 'ReadKey', dev_2_readAPIKey, 'Fields', [6]);
+dev_3_bounds = thingSpeakRead(dev_3_channel_ID, 'ReadKey', dev_3_readAPIKey, 'Fields', [6]);
+
+% Send email (forwarded to text) based on which alert was triggered
+if dev_1_emergency == 1
+    lon_num = thingSpeakRead(dev_1_channel_ID, 'ReadKey', dev_1_readAPIKey, 'Fields', [1]);
+    lat_num = thingSpeakRead(dev_1_channel_ID, 'ReadKey', dev_1_readAPIKey, 'Fields', [2]);
+    lon_str = num2str(lon_num,'%.5f');
+    lat_str = num2str(lat_num,'%.5f');
+    alert_body = ['Emergency button pressed in device 1.\nCurrent Position:\nLongitude: ' lon_str '\nLatitude: ' lat_str ''];
+    alert_subject = 'TO TEXT';
+    alert_api_key = 'TAK4WT1gQPV6wNF7HO9';
+    alert_url= "https://api.thingspeak.com/alerts/send";
+    jsonmessage = sprintf(['{"subject": "%s", "body": "%s"}'], alert_subject,alert_body);
+    options = weboptions("HeaderFields", {'Thingspeak-Alerts-API-Key', alert_api_key; 'Content-Type','application/json'});
+    result = webwrite(alert_url, jsonmessage, options);
+elseif dev_2_emergency == 1
+    lon_num = thingSpeakRead(dev_2_channel_ID, 'ReadKey', dev_2_readAPIKey, 'Fields', [1]);
+    lat_num = thingSpeakRead(dev_2_channel_ID, 'ReadKey', dev_2_readAPIKey, 'Fields', [2]);
+    lon_str = num2str(lon_num,'%.5f');
+    lat_str = num2str(lat_num,'%.5f');
+    alert_body = ['Emergency button pressed in device 2.\nCurrent Position:\nLongitude: ' lon_str '\nLatitude: ' lat_str ''];
+    alert_subject = 'TO TEXT';
+    alert_api_key = 'TAK4WT1gQPV6wNF7HO9';
+    alert_url= "https://api.thingspeak.com/alerts/send";
+    jsonmessage = sprintf(['{"subject": "%s", "body": "%s"}'], alert_subject,alert_body);
+    options = weboptions("HeaderFields", {'Thingspeak-Alerts-API-Key', alert_api_key; 'Content-Type','application/json'});
+    result = webwrite(alert_url, jsonmessage, options);
+elseif dev_3_emergency == 1
+    lon_num = thingSpeakRead(dev_3_channel_ID, 'ReadKey', dev_3_readAPIKey, 'Fields', [1]);
+    lat_num = thingSpeakRead(dev_3_channel_ID, 'ReadKey', dev_3_readAPIKey, 'Fields', [2]);
+    lon_str = num2str(lon_num,'%.5f');
+    lat_str = num2str(lat_num,'%.5f');
+    alert_body = ['Emergency button pressed in device 3.\nCurrent Position:\nLongitude: ' lon_str '\nLatitude: ' lat_str ''];
+    alert_subject = 'TO TEXT';
+    alert_subject = 'TO TEXT';
+    alert_api_key = 'TAK4WT1gQPV6wNF7HO9';
+    alert_url= "https://api.thingspeak.com/alerts/send";
+    jsonmessage = sprintf(['{"subject": "%s", "body": "%s"}'], alert_subject,alert_body);
+    options = weboptions("HeaderFields", {'Thingspeak-Alerts-API-Key', alert_api_key; 'Content-Type','application/json'});
+elseif dev_1_bounds == 1
+    alert_body = 'Device 1 is out of bounds.';
+    alert_subject = 'TO TEXT';
+    alert_api_key = 'TAK4WT1gQPV6wNF7HO9';
+    alert_url= "https://api.thingspeak.com/alerts/send";
+    jsonmessage = sprintf(['{"subject": "%s", "body": "%s"}'], alert_subject,alert_body);
+    options = weboptions("HeaderFields", {'Thingspeak-Alerts-API-Key', alert_api_key; 'Content-Type','application/json'});
+    result = webwrite(alert_url, jsonmessage, options);
+elseif dev_2_bounds == 1
+    alert_body = 'Device 2 is out of bounds.';
+    alert_subject = 'TO TEXT';
+    alert_api_key = 'TAK4WT1gQPV6wNF7HO9';
+    alert_url= "https://api.thingspeak.com/alerts/send";
+    jsonmessage = sprintf(['{"subject": "%s", "body": "%s"}'], alert_subject,alert_body);
+    options = weboptions("HeaderFields", {'Thingspeak-Alerts-API-Key', alert_api_key; 'Content-Type','application/json'});
+    result = webwrite(alert_url, jsonmessage, options);
+elseif dev_3_bounds == 1
+    alert_body = 'Device 3 is out of bounds.';
+    alert_subject = 'TO TEXT';
+    alert_api_key = 'TAK4WT1gQPV6wNF7HO9';
+    alert_url= "https://api.thingspeak.com/alerts/send";
+    jsonmessage = sprintf(['{"subject": "%s", "body": "%s"}'], alert_subject,alert_body);
+    options = weboptions("HeaderFields", {'Thingspeak-Alerts-API-Key', alert_api_key; 'Content-Type','application/json'});
+    result = webwrite(alert_url, jsonmessage, options);
+end
