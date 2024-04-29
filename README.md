@@ -484,7 +484,7 @@ In this video, we sent mock GPS data from an end node, making it look like it wa
 | Maria Barrera      | [maria.barrera@ufl.edu](mailto:maria.barrera@ufl.edu)   | 786-319-6846|
 | Justin Nagovskiy   | [jnagovskiy@ufl.edu](mailto:jnagovskiy@ufl.edu)         | 954-258-6993|
 
-Please reach out to William if you have any questions about the project.
+Please contact William Lorenzen for any inquiries or issues related to the project.
 
 Project Repository on GitHub: https://github.com/williamlorenzen/LoRaWAN-Team
 
