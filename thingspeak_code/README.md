@@ -11,7 +11,7 @@ This code then reads the fields associated with each emergency flag on the devic
 The ThingSpeak_Plotting file contains code that can be pasted into a MATLAB Visualization. This code plots on a map all of the GPS locations that an end node sent to its respective channel on the current day. The code also plots polygons on the map that represent different fields and it counts the number of end node GPS coordinates that are located in each polygon. Originally, this code was going to serve as the tool that agricultural managers could use to view end node locations over time, but do to random display issues with the MATLAB Visualizations, the non-interactive nature of the map, and the small scale of the output, this was abandoned. However, this code can still serve to teach how to create MATLAB Visualizations in ThingSpeak if future teams wish to implement them. The display that results from this piece of code can be seen below. 
 
 <p align="center">
-	<img src="documentation_images/ts_plot.png" width = "300">
+	<img src="documentation_images/ts_plot.png" width = "500">
 </p>
 
 ### Unrealized Boundary Status
