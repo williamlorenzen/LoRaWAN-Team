@@ -326,7 +326,7 @@ These are just ideas, but there are many ways in which this project can be built
 
 ### Python GUI
 
-![](documentation_images/GUI.png)
+![](documentation_images/gui.png)
 
 The Python GUI is intended to be used by agricultural managers so that they can monitor the current locations of the end nodes, the paths that the end nodes traveled on particular days, and the rest of the end node data, including battery charge, messages, time since the last uplink was received, and emergency status. The GUI offers additional features, such as displaying polygons representing different fields on an agricultural site (allowing users to easily identify which end nodes are in which fields), automatic snapping to and plotting on the map of the locations of end nodes that send emergency signals, a feature to toggle the polygons on and off, and a feature to snap the map to the last received location of a particular end node. 
 
