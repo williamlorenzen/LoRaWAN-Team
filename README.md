@@ -14,7 +14,7 @@
 </p>
 
 <!-- TABLE OF CONTENTS -->
-<details>
+<details open="open">
   <summary>Table of Contents</summary>
 
 ## Table of Contents
@@ -35,7 +35,7 @@
   - [Bluetooth Uplink Communication](#bluetooth-uplink-communication)
   - [Downlink Communication](#downlink-communication)
   - [Farm Communication System and Future Work](#farm-communication-system-and-future-work)
-- [Python GUI](#python-gui)
+  - [Python GUI](#python-gui)
 - [Authors](#authors)
 - [Acknowledgements](#acknowledgements)
 </details>
@@ -243,8 +243,14 @@ The gateway needs to be connected to WiFi at all times to communicate with the s
 <!-- ThingSpeak -->
 ## ThingSpeak
 
+- tell them to reach out about login info
+- talk about how most of stuff is done already, just need to do react
+- say there are matlab visulaiztion capabilities 
+
 ### Reacts
 
+- provide react code
+- explain out of bounds problems
 
 <!-- Operation -->
 ## Operation
