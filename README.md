@@ -232,19 +232,25 @@ The end node can be powered on by pressing the power switch - a round rocker swi
 	- Select Button (blue) - used to turn the Bluetooth communication module on/off
 	- Toggle Button (green) - used to toggle the OLED display on/off
 
+<p align="center">
+	<img src="documentation_images/node.png">
+</p>
+
 The **Toggle Button** can be pressed once to make the current longitude, latitude, and battery voltage (mV) of the end node appear on the OLED display. When the toggle button is pressed again, the OLED display will be cleared and turned off.
 
-The **Select Button** can be pressed once to turn Bluetooth communication on, which results in a corresponding message being displayed on the OLED. When the Select button is pressed again, Bluetooth communication is turned off and, again, a corresponding message is displayed on the OLED. Bluetooth communication with the end node is discussed more in the [Bluetooth Communication](#bluetooth-communication) section of this README.
+The **Select Button** can be pressed once to turn Bluetooth communication on, which results in a corresponding message being displayed on the OLED. When the Select button is pressed again, Bluetooth communication is turned off and, again, a corresponding message is displayed on the OLED. Bluetooth communication with the end node is discussed more in the [Bluetooth Communication](#bluetooth-uplink-communication) section of this README.
 
 The **Emergency Button** can be held down once to trigger a message on the OLED display asking the user if they want to send an emergency signal. If they do, they can hold down the emergency button once again, and the emergency signal will be sent in the next uplink message to the server. A message then appears on the OLED stating that the emergency signal has been sent. If the emergency button was accidentally held down once and it is not held down again within a 10 second window, then the OLED message will be cleared, and the emergency button will once again have to be held down twice to send an emergency signal. This protects against an emergency signal accidentally being sent, which triggers email and text notifications and could cause first responders to be called unnecessarily.
 
 A video of the end node button's functionalities can be found [here](https://www.youtube.com/watch?v=o7ewifo6IbQ&t=4s). A video of the emergency button functionality and its interaction with TTN, ThingSpeak, and the Python GUI can be found [here](https://www.youtube.com/watch?v=NjQwIZdp0Hk&t=1s).
 
+### GPS Operation
+
 The device is programmed to start the GPS upon bootup, but it can take some time for the GPS to fix onto the four satellites required for the longitude and latitude to be determined. When the GPS has fixed, a green LED on the HTCC-AB02S starts to flash and the OLED displays the time that it took for the GPS to fix. The GPS remains fixed whilst the Heltec is in low power mode between uplink messages, meaning that the GPS has to only fix once upon bootup and after every time that Bluetooth communication is initiated and stopped (which is not expected to be frequent). 
 
 A video of the end node's GPS fixing and real time GPS data being sent to TTN, ThingSpeak, and the Python GUI can be found [here](https://www.youtube.com/watch?v=rXeL1cVMSls&t=5s). Emergency button functionality was once again demonstrated in this video. 
 
-#### Bluetooth Uplink Communication
+### Bluetooth Uplink Communication
 
 The end node contains an [Adafruit Bluetooth Low Energy module](https://www.adafruit.com/product/2633#description), which will allow field workers to transmit unique messages to the server using their phones. The BLE module was chosen both because of its Arduino support and because it has a dedicated iOS app that will allow users to easily interface with it. To establish Bluetooth connection and send messages to the server, the end user need only:
 
@@ -278,9 +284,15 @@ The end node contains an [Adafruit Bluetooth Low Energy module](https://www.adaf
 
 A video of the Bluetooth connection, interfacing, and the resulting messages on the Python GUI can be found [here](https://www.youtube.com/watch?v=-xSc22rfDIg&t=1s).
 
-An added feature of the BLE module is that although the end user must turn BLE communication on and off in order to interface with the device, the module is always connected to the end node's power supply, meaning that the BLE beacons constantly beacons while the end node is turned on. This can allow agricultural workers to detect when they are near particular assets by monitoring the names of the Bluetooth beacons that appear in the BluefruitConnect App, which can make it easier for them to check that asset off as being in inventory. For example, an end node programmed to be mounted on "Tractor 321" could have the name of its Bluetooth beacon changed to "Tractor 321" using the NEW_BLE_NAME macro in our GPS_LoRa code. Then, when farm workers are doing inventory, they can walk around the general area where the end node attached to "Tractor 321" was seen on the the Python GUI, open the BluefruitConnect app and view the "Tractor 321" bluetooth beacon, and mark "Tractor 321" as being in inventory.
+An added feature of the BLE module is that although the end user must turn BLE communication on and off in order to interface with the device, the module is always connected to the end node's power supply, meaning that the BLE beacons constantly beacons while the end node is turned on. This can allow agricultural workers to detect when they are near particular assets by monitoring the names of the Bluetooth beacons that appear in the BluefruitConnect App, which can make it easier for them to check that asset off as being in inventory. 
 
-#### Downlink Communication
+<p align="center">
+	<img src="documentation_images/ble.png" width = "400">
+</p>
+
+For example, an end node programmed to be mounted on "Tractor 321" could have the name of its Bluetooth beacon changed to "Tractor 321" using the NEW_BLE_NAME macro in our GPS_LoRa code. Then, when farm workers are doing inventory, they can walk around the general area where the end node attached to "Tractor 321" was seen on the the Python GUI, open the BluefruitConnect app and view the "Tractor 321" bluetooth beacon, and mark "Tractor 321" as being in inventory.
+
+### Downlink Communication
 
 The end nodes also feature downlink communication, meaning that messages can be sent from the server down to individual end nodes. We have configured specific downlink codes to trigger particular messages being displayed on an end node's OLED for 10 seconds, after which the OLED is cleared. These messages can be read by nearby agricultural workers and can facilitate long range communication between field workers and managers in rural regions that do not have cellular connection. The table of preconfigured downlink codes and their corresponding OLED messages are below:
 
@@ -314,13 +326,13 @@ We are using Class A devices, meaning that after every uplink message, there are
 
 A video of the downlink message process and the corresponding OLED displays can be found [here](https://www.youtube.com/watch?v=OvLeOCoEfU0).
 
-#### Enhanced Farm Communication Systems and Future Work
+### Enhanced Farm Communication Systems and Future Work
 
-The Bluetooth uplink messages and TTN downlink messages can facilitate communication between field workers and managers via LoRaWAN in locations that do not have cellular connection. For example, a field worker could use their phone to send the code "water" to the end node, which would show up in the Python GUI as "In urgent need of water" in the corresponding device's message box. The manager could see this, identify the current GPS coordinates of that end node, and have another worker drive to the end node's location to provide the worker with water. The manager could send a downlink message corresponding to "We are on our way" to the respective end node so that the worker knows that help is coming. 
+The Bluetooth uplink messages and TTN downlink messages can facilitate communication between field workers and managers via LoRaWAN in locations that do not have cellular connection. For example, a field worker could use their phone to send the code "water" to the end node, which would show up in the Python GUI as "In urgent need of water" in the corresponding device's message box. The manager could see this, identify the current GPS coordinates of that end node, and have another worker drive to the end node's location to provide the worker with water. The manager could send a downlink message corresponding to "We are on our way" to the respective end node so that the worker would know that help is coming. 
 
-Additionally, either Bluetooth codes or downlink codes could be used to control many other future features of the end node, whether that be actuating motors or turning on additional sensors for environmental monitoring or equipment diagnostics, providing a scalable and versatile tool for agricultural management. A vibration motor could be added to the end node, which can be triggered when a downlink message is received, notifying nearby workers to look at the OLED display to see what the manager sent. 
+Additionally, either Bluetooth codes or downlink codes could be used to control many other future features of the end node, whether that be actuating motors or turning on additional sensors for environmental monitoring or equipment diagnostics, providing a scalable and versatile tool for agricultural management. A vibration motor could be added to the end node, which could be triggered when a downlink message is received, notifying nearby workers to look at the OLED display to see what the manager sent. 
 
-The BLE module's VCC pin could be connected to a FET that is connected to the end node's battery and that is controlled by a GPIO pin, allowing the BLE module to be turned on and off through software. This would not only make the end node more power efficient by not having the BLE module powered at all times, but the end node could be configured so that if a particular downlink code was received, the BLE would remain on until a different downlink message code was received that told it to power off. This could allow a farm manager to tell particular end nodes to beacon Bluetooth signals with the names of the assets that they are attached to, which would allow a farm worker to walk around with the BluefruitConnect open on inventory day, view all the nearby beacons, and mark these assets as being in inventory, which could quicken this lengthy and tedious process. Perhaps then the farm worker could connect to the BLEs of the nearby beaconing devices, send a code word corresponding to inventory ("inven"), and the corresponding device's message box would appear as being "In Inventory" in the Python GUI, which could be seen by the agricultural manager.
+The BLE module's VCC pin could be connected to a FET that is connected to the end node's battery and that is controlled by a GPIO pin, allowing the BLE module to be turned on and off through software. This would not only make the end node more power efficient by not having the BLE module powered at all times, but the end node could be configured so that if a particular downlink code was received, the BLE would remain on until a different downlink message code was received that told it to power off. This could allow a farm manager to tell particular end nodes to beacon Bluetooth signals with the names of the assets that they are attached to, which would allow a farm worker to walk around with the BluefruitConnect open on inventory day, view all the nearby beacons, and mark these assets as being in inventory, which could quicken the lengthy and tedious inventory process. Perhaps then the farm worker could connect to the BLEs of the nearby beaconing devices, send a code word corresponding to inventory ("inven"), and the corresponding device's message box would appear as being "In Inventory" in the Python GUI, which could be seen by the agricultural manager.
 
 These are just ideas, but there are many ways in which this project can be built upon to address different agricultural challenges.
 
@@ -328,11 +340,13 @@ These are just ideas, but there are many ways in which this project can be built
 
 ![](documentation_images/gui.png)
 
-The Python GUI is intended to be used by agricultural managers so that they can monitor the current locations of the end nodes, the paths that the end nodes traveled on particular days, and the rest of the end node data, including battery charge, messages, time since the last uplink was received, and emergency status. The GUI offers additional features, such as displaying polygons representing different fields on an agricultural site (allowing users to easily identify which end nodes are in which fields), automatic snapping to and plotting on the map of the locations of end nodes that send emergency signals, a feature to toggle the polygons on and off, and a feature to snap the map to the last received location of a particular end node. 
+The Python GUI is intended to be used by agricultural managers so that they can monitor the current locations of the end nodes, the paths that the end nodes traveled on particular days, and the rest of the end node data, including battery charge, messages, time since the last uplink was received, and emergency status. The GUI offers additional features, such as displaying polygons representing different fields on an agricultural site (allowing users to easily identify which end nodes are in which fields), automatic snapping to and plotting on the map the locations of end nodes that sent emergency signals, a feature to toggle the polygons on and off, and a feature to snap the map to the last received location of particular end nodes. 
 
-This is best demonstrated with a [video] (https://www.youtube.com/watch?v=8F29PMxJtjw).
+This is best demonstrated with a [video](https://www.youtube.com/watch?v=8F29PMxJtjw).
 
-After the GUI is opened, its fields must be manually updated by clicking "Get Latest" buttons. When this is done, there is no discernible latency between the uplink message being received by TTN, the decoded data being sent to ThingSpeak, and the data being plotted and displayed on the Python GUI. This is best demonstrated in a [video](https://www.youtube.com/watch?v=JTSg13Apyt0). In this video, we sent mock GPS data from the end node of it traveling through the Quincy, Fl site, which can clearly be seen in the Python GUI. Note that the GUI was somewhat laggy in the video because I had to have my computer connected to my phone's hotspot whilst being SSHed into the gateway.
+After the GUI is opened, its fields must be manually updated by clicking "Get Latest" buttons. When this is done, there is no discernible latency between the uplink message being received by TTN, the decoded data being sent to ThingSpeak, and the data being plotted and displayed on the Python GUI. This is best demonstrated in a [video](https://www.youtube.com/watch?v=JTSg13Apyt0). 
+
+In this video, we sent mock GPS data from an end node, making it look like it was traveling across the Quincy, Fl site, which can clearly be seen in the Python GUI. Note that the GUI was somewhat laggy in the video because I had to have my computer connected to my phone's hotspot whilst being SSHed into the gateway.
 
 <!-- Authors -->
 ## Authors
