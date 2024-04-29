@@ -243,14 +243,79 @@ The gateway needs to be connected to WiFi at all times to communicate with the s
 <!-- ThingSpeak -->
 ## ThingSpeak
 
-- tell them to reach out about login info
-- talk about how most of stuff is done already, just need to do react
-- say there are matlab visulaiztion capabilities 
+### ThingSpeak Account Creation
 
-### Reacts
+ThingSpeak is our application server where the data from TTN is sent and displayed, the emergency status flag is monitored, and an alert is sent to the email associated with the ThingSpeak account if the emergency flag is set to "1". There is no shared ThingSpeak account for LoRaWAN or Sentinel teams, so future teams will need to create a new MathWorks account (as ThingSpeak is a MathWorks service) for their project. The new MathWorks account should be created with a gmail account, not a UF email account. 
 
-- provide react code
-- explain out of bounds problems
+This is because you must configure forwarding rules on the email associated with the MathWorks account so that when a ThingSpeak alert is received, the email is forwarded to any relevant phone numbers. We found that UF emails do not allow for automatic forwarding of emails to members outside of the organization, so gmail must be used so that the alerts can be properly sent via text. If you want to access to the [Spring 2024 ThingSpeak account](https://thingspeak.com/login) to see our implementation, please reach out to [William](#authors).
+
+### ThingSpeak Visualizations and Reacts
+
+ThingSpeak is an IoT analytics platform that allows for analysis, visualization, and reacts through MATLAB. There is great documentation for it, which can be found [here](https://thingspeak.com/pages/how_to). Originally, we planned for ThingSpeak to be used by agricultural managers to view end node data and current locations, but due to every device needing to be on a different ThingSpeak channel and MATLAB visualizations being very small and non-interactive, we decided that a [Python GUI](gui_software) would serve this purpose instead. The limitations of ThingSpeak visualizations for our project can be seen in the small, low resolution output below. More on this visualization's source code is [here](thingspeak_code/).
+
+<p align="center">
+	<img src="documentation_images/ts_plot.png">
+</p>
+
+Therefore, ThingSpeak is primarily being used in our project to host Reacts, which trigger preconfigured actions whenever a ThingSpeak channel meets a certain condition. We have configured Reacts for each channel associated with our systems devices such that the first time that field 3, associated with the emergency flag, switches from 0 to 1, an email is sent to the gmail associated with the ThingSpeak account, with the email containing the current GPS coordinates of the end node that sent the emergency signal. To better understand Reacts, refer to the [MathWorks documentation](https://www.mathworks.com/help/thingspeak/act-on-your-data.html). For reference, below is the react that was created for William's device:
+
+<p align="center">
+	<img src="documentation_images/react.png">
+</p>
+
+This react ensures that when field 3 of channel 2496188 becomes "1", the ["Send Alert"](thingspeak_code/Send_Alert.txt) code is run. The Send Alert code then reads the fields associated with each emergency flag on the devices, and if a particular flag is equal to 1, a corresponding email alert is sent. It should be noted that the free version of ThingSpeak limits users to two ThingSpeak email alerts every 30 minutes. There is more on the Send Alert code and the "Boundary Flag" in the [ThingSpeak folder README](thingspeak_code/).
+
+### ThingSpeak Account Setup
+
+To fully set up your ThingSpeak account so that it fits with our system architecture, all that needs to be done is:
+
+1. Create a new ThingSpeak channel for each end node device. 
+
+2. Under "Sharing," click "Share channel view with everyone." This makes the channel Public and will allow the Python GUI to extract data from the channel using the ThingSpeak API.
+
+3. In TTN, alter each application webhook according to new the ThingSpeak channel IDs and Write API Keys associated with each end node.
+
+4. Manually create Reacts for each ThingSpeak channel, with each of them triggering the "Send Alert" code.
+
+5. Create a new MATLAB Analysis called "Send Alert" and paste [our code]((thingspeak_code/Send_Alert.txt)) into it.
+
+6. Edit the channel IDs and Read API Keys in the Send Alert code according to match with the new channels.
+
+With that, your ThingSpeak account is fully set up and can easily be edited to accomodate more end nodes. Your TTN application webhooks and TTN payload formatters do the work behind the scenes to send data to the correct ThingSpeak channels, which you can view by doing "Add Visualization" for every field on your ThingSpeak channels, making the channel look like [this](https://thingspeak.com/channels/2496188).
+
+It should be noted that the free version of ThingSpeak is limited to four channels. You can register for other [licenses](https://thingspeak.com/prices) to increase the number of channels. Or each team member could utilize a free membership, set up their accounts following the previously described steps, and have their TTN applications send to channels associated with the different accounts.
+ 
+### Text Message Notification Setup
+
+With your ThingSpeak account set up, ThingSpeak will send you an email like the one below whenever an emergency signal is received.
+
+<p align="center">
+	<img src="documentation_images/email.png">
+</p>
+
+We want this email to be automatically fowarded to relevant phone numbers via text, which will better facilitate an emergency repsonse. To do so, follow the steps in [this tutorial](https://www.instructables.com/Get-Gmail-To-Text-Emails-To-Your-Phone/), with some slight changes: 
+
+1. Make sure that "Forwarding" in the "Forwarding and POP/IMP" tab is set to "Disable forwarding."
+
+2. In the "Filters and Blocked Addresses" tab, click "Create a new filter."
+
+3. In the "From" input cell, type "thingspeak-alerts@mail.thingspeak.com"
+
+4. Click "Create Filter"
+
+5. Check the box next to "Forward it to:" and select the relevant cellphone email address that you set up by following the linked tutorial. 
+
+6. Verify the phone number.
+
+7. Follow steps 2-7 for each phone that you want the alert forwarded to.
+
+Please note that if Verizon is your carrier, use [10-digit phone number]@vzwpix.com rather than [10-digit phone number]@vtext.com, as the @vtext.com email has a message capacity that cuts forwarded emails short.
+
+With that, your ThingSpeak account and text message alerts will be fully set up and you can receive alerts like the one below:
+
+<p align="center">
+	<img src="documentation_images/text.jpg">
+</p>
 
 <!-- Operation -->
 ## Operation
