@@ -24,7 +24,7 @@
   - [LoRaWAN as a Solution](#lorawan-as-a-solution)
 - [System Architecture](#system-architecture)
 - [TheThingsNetwork](#thethingsnetwork)
-  - [Background](#background)
+  - [TTN Background](#ttn-background)
   - [TTN Applications](#ttn-applications)
   - [End Device Registration](#end-device-registration)
 - [ThingSpeak](#thingspeak)
@@ -93,7 +93,7 @@ Our system architecture is comprised of of five primary components: the end node
 <!-- Operation -->
 ## TheThingsNetwork
 
-### Background 
+### TTN Background 
 
 TTN is the backbone of our system, with it receiving the uplink messages from our end nodes, decrypting and decoding the data, and forwarding the properly formatted data to ThingSpeak. TTN can also schedule downlink messages to particular end nodes, which we have implemented functionality for on our devices. 
 
