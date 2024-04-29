@@ -207,13 +207,13 @@ This is because you must configure forwarding rules on the email associated with
 ThingSpeak is an IoT analytics platform that allows for analysis, visualization, and reacts through MATLAB. There is great documentation for it, which can be found [here](https://thingspeak.com/pages/how_to). Originally, we planned for ThingSpeak to be used by agricultural managers to view end node data and current locations, but due to every device needing to be on a different ThingSpeak channel and MATLAB visualizations being very small and non-interactive, we decided that a [Python GUI](gui_software) would serve this purpose instead. The limitations of ThingSpeak visualizations for our project can be seen in the small, low resolution output below. More on this visualization's source code is [here](thingspeak_code/).
 
 <p align="center">
-	<img src="documentation_images/ts_plot.png" width = "700">
+	<img src="documentation_images/ts_plot.png" width = "500">
 </p>
 
 Therefore, ThingSpeak is primarily being used in our project to host Reacts, which trigger preconfigured actions whenever a ThingSpeak channel meets a certain condition. We have configured Reacts for each channel associated with our systems devices such that the first time that field 3, associated with the emergency flag, switches from 0 to 1, an email is sent to the gmail associated with the ThingSpeak account, with the email containing the current GPS coordinates of the end node that sent the emergency signal. To better understand Reacts, refer to the [MathWorks documentation](https://www.mathworks.com/help/thingspeak/act-on-your-data.html). For reference, below is the react that was created for William's device:
 
 <p align="center">
-	<img src="documentation_images/react.png" height = "700">
+	<img src="documentation_images/react.png" height = "500">
 </p>
 
 This react ensures that when field 3 of channel 2496188 becomes "1", the ["Send Alert"](thingspeak_code/Send_Alert.txt) code is run. The Send Alert code then reads the fields associated with each emergency flag on the devices, and if a particular flag is equal to 1, a corresponding email alert is sent. It should be noted that the free version of ThingSpeak limits users to two ThingSpeak email alerts every 30 minutes. There is more on the Send Alert code and the "Boundary Flag" in the [ThingSpeak folder README](thingspeak_code/).
@@ -243,7 +243,7 @@ It should be noted that the free version of ThingSpeak is limited to four channe
 With your ThingSpeak account set up, ThingSpeak will send you an email like the one below whenever an emergency signal is received.
 
 <p align="center">
-	<img src="documentation_images/email.png" width = "600">
+	<img src="documentation_images/email.png" width = "500">
 </p>
 
 We want this email to be automatically fowarded to relevant phone numbers via text, which will better facilitate an emergency repsonse. To do so, follow the steps in [this tutorial](https://www.instructables.com/Get-Gmail-To-Text-Emails-To-Your-Phone/), with some slight changes: 
@@ -267,7 +267,7 @@ Please note that if Verizon is your carrier, use [10-digit phone number]@vzwpix.
 With that, your ThingSpeak account and text message alerts will be fully set up and you can receive alerts like the one below:
 
 <p align="center">
-	<img src="documentation_images/text.jpg" width = "500">
+	<img src="documentation_images/text.jpg" width = "400">
 </p>
 
 <!-- Gateway -->
