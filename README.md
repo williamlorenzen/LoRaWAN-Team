@@ -7,10 +7,11 @@
 
   <h2 align="center" style="font-size: 52px;">LoRaWAN Asset Tracker and Emergency Button</h2>
 
-  <p align="center" style="font-size: 46px;">
+  <p align="center" style="font-size: 42px;">
     Spring 2024 LoRaWAN Team
-    <br />
-    <span style="font-size: 28px;">William Lorenzen, Maria Barrera, Justin Nagovskiy</span>
+  </p>
+  <p align="center" style="font-size: 32px;">
+    William Lorenzen, Maria Barrera, Justin Nagovskiy
   </p>
 </p>
 
