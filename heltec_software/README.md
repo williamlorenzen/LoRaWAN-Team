@@ -44,10 +44,7 @@ To write our end node script, we added to this example script by configuring the
 
 The GPS_LoRa.ino script has been extensively commented so that it may be added to or used as a model for future LoRaWAN team implementations.
 
-Something to keep in mind is that the GPS_LoRa.ino code, as well as all relevant dependencies, take up 93% of the AB02S's program storage space (122235 bytes of the 131072 maximum). I am genuinely not sure how much this may present as a limitation for building upon our script, as the LoRaWAN.ino script alone takes up about 70% of storage space. With most of the AB02S's relevant peripherals and dependencies already being used in our script, this may mean that there is still some room to add to it, such as by adding sensors or other peripherals. This storage space is a concern for further growth though, and may necessitate the use of other MCUs, such as the Photon, which Dr. Eisensatdt has in abundance.
-
-
-
+Something to keep in mind is that the GPS_LoRa.ino code, as well as all relevant dependencies, take up 93% of the AB02S's program storage space (122235 bytes of the 131072 maximum). I am genuinely not sure how much this may present as a limitation for building upon our script, as the LoRaWAN.ino script alone takes up about 70% of storage space. With most of the AB02S's relevant peripherals already integrated into our script, the essential dependencies required for these components are also already loaded into the program’s storage space. This effectively reduces the additional storage needed for any new peripherals that rely on these existing dependencies, which may mean may there is still some room to add to our program, such as by adding sensors or other peripherals. This storage utilization is definitely a concern for further growth though, and may necessitate the use of other MCUs, such as the Photon, which Dr. Eisensatdt has in abundance.
 
 
 
