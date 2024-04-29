@@ -29,7 +29,7 @@
   - [Option 2](#option-2)
 - [ThingSpeak](#thingspeak)
   - [ThingSpeak Account Creation](#thingspeak-account-creation)
-  - [ThingSpeak Visualizations and Reacts](thingspeak-visualizations-and-reacts)
+  - [ThingSpeak Visualizations and Reacts](#thingspeak-visualizations-and-reacts)
   - [ThingSpeak Account Setup](#thingspeak-account-setup)
   - [Text Message Notification Setup](#text-message-notification-setup)
 - [Operation](#operation)
