@@ -24,6 +24,12 @@ The PCB was designed in Altium and is in the "LoRaWAN Senior Project" folder in 
 	<img src="documentation_images/pcb.png" width="900">
 </p>
 
+A strange design choice by Heltec when designing the AB02S was to place the GPS antenna on the underside of the board, opposite the OLED display. As the AB02S's Air530Z GPS already takes quite a long time to fix, sometimes taking up to several minutes outside, we knew that having the GPS antenna pointed down into our PCB would only worsen this problem. As the OLED display is wired to the AB02S using a flexible printed circuit, we decided to unscrew the OLED from the AB02S, flip it so that it hung from the side of the development board and was pointing in the same direction as the GPS antenna, and mount the OLED to our PCB with the AB02S alongside it. This way, both the GPS antenna and OLED display were pointing towards the top of our end node.
+
+<p align="center">
+	<img src="documentation_images/pcb.png">
+</p>
+
 ## End Node
 
 Pictures of the end node can be seen below. The emergency (red), select/BLE (blue), and toggle (green) buttons are embedded in the waterproof box.
