@@ -407,7 +407,7 @@ In this video, we sent mock GPS data from an end node, making it look like it wa
 
 Please reach out to William if you have any questions about the project.
 
-[Project Repository on GitHub](https://github.com/williamlorenzen/LoRaWAN-Team)
+Project Repository on GitHub: https://github.com/williamlorenzen/LoRaWAN-Team
 
 <!-- Acknowledgements -->
 ## Acknowledgements
