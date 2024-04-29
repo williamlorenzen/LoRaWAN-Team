@@ -24,14 +24,17 @@
   - [LoRaWAN as a Solution](#lorawan-as-a-solution)
 - [System Architecture](#system-architecture)
 - [TheThingsNetwork](#thethingsnetwork)
-- [Gateway](#gateway)
-  - [Option 1](#option-1)
-  - [Option 2](#option-2)
+  - [Background](#background)
+  - [TTN Applications](#ttn-applications)
+  - [End Device Registration](#end-device-registration)
 - [ThingSpeak](#thingspeak)
   - [ThingSpeak Account Creation](#thingspeak-account-creation)
   - [ThingSpeak Visualizations and Reacts](#thingspeak-visualizations-and-reacts)
   - [ThingSpeak Account Setup](#thingspeak-account-setup)
   - [Text Message Notification Setup](#text-message-notification-setup)
+- [Gateway](#gateway)
+  - [Option 1](#option-1)
+  - [Option 2](#option-2)
 - [Operation](#operation)
   - [End Node](#end-node)
   - [GPS Operation](#gps-operation)
@@ -90,13 +93,19 @@ Our system architecture is comprised of of five primary components: the end node
 <!-- Operation -->
 ## TheThingsNetwork
 
+### Background 
+
 TTN is the backbone of our system, with it receiving the uplink messages from our end nodes, decrypting and decoding the data, and forwarding the properly formatted data to ThingSpeak. TTN can also schedule downlink messages to particular end nodes, which we have implemented functionality for on our devices. 
 
 On TTN, the gateway and end nodes must be configured appropriately in order to facilitate LoRaWAN communication. The LoRaWAN and Sentinel teams are using a shared TTN account for their implementations, on which the SX1303 gateway has already been configured. Future team members can reach out to [William](#authors) for the login information. As the gateway has already been configured on this shared account, configuration of the gateway on TTN will not be explained. TTN can be accessed [here](https://nam1.cloud.thethings.network/console/applications).
 
+### TTN Applications
+
 The important part of TTN for building upon our project or implementing other LoRaWAN based applications is the "Applications" tab. It is here that end devices are configured, which in our case is the HTCC-AB02S. We have designed our system so that each end node is configured in in its own unique application. This is because our TTN applications are configured to send decoded data to ThingSpeak, which then appears on ThingSpeak channels. The problem with these ThingSpeak channels is that there is a maximum of eight data fields per channel, meaning that a single ThingSpeak channel would not be able to handle the end node data of even two of our end nodes. Additionally, a single TTN application cannot be configured to send data from different end devices to separate ThingSpeak channels to circumvent the channel field limit. Therefore, we decided that our system would implement a dedicated TTN application for each of its end nodes, with each dedicated application sending end node data to a dedicated ThingSpeak channel. This way, each device was able to send eight fields of data to ThingSpeak, which was sufficient for our project and will allow future teams the bandwidth to send additional data from our end nodes, such as agricultural sensor data.
 
 Establishing connection between TTN and ThingSpeak includes creating a webhook to a ThingSpeak channel from a TTN application. This process is explained in this [video](https://www.youtube.com/watch?v=b9Ga4nwnsTM).
+
+### End Device Registration
 
 The next step is to register an end device in an application. To do so: 
 
@@ -182,67 +191,6 @@ The combination of a ThingSpeak webhook and the returning of fields in the paylo
 
 With that, an end node can be been configured on TTN. When a new end node is being added to the system, a new application will have to be created, the end device registered, the relevant Javascript formatter code pasted into the payload formatter, a new ThingSpeak channel created, and the webhook to the new channel established.
 
-<!-- Gateway -->
-## Gateway
-
-<p align="center">
-	<img src="documentation_images/gateway.jpg" width = "350">
-</p>
-
-The SX1303 Raspberry Pi gateway has already been fully setup and initialized on TTN. To connect the end nodes to TTN, the gateway needs to be connected to the server as well, which is done by powering up the gateway and running its packet forwarder. 
-
-There are two options for connecting the gateway to the server:
-1. SSHing in
-2. Starting the packet forwarder directly on the Raspberry Pi
-
-
-### Option 1:
-1. Connect the gateway and your computer to the same WiFi network. You cannot use eduroam on the gateway, so you will either need to use your hotspot, or connect to the wifi that Dr.Eisenstadt has setup in NEB212. If you are using your hotspot, the gateway will not automatically join the first time, so you will need to directly startup the Raspberry Pi and connect to your WiFi hotspot manually, like in Option 2, so that the gateway knows your hotspot. Upon future bootups, the gateway will automatically connect to your hotspot.
-2. Once the gateway and your computer are on the same Wifi, open up "command prompt" on your computer.
-3. Paste:
-	```
-	ssh lora23@raspberrypi
-	```
-4. When prompted for the password, enter:
-	```
-	IoT4Ag
-	```
-5. When you have connected to the gateway, paste the following lines separately:
-	```
-	cd ~
-	```
-	```
-	cd ~/sx1302_hal/
-	```
-	```
-	cd packet_forwarder
-	```
-	```
-	sudo ./lora_pkt_fwd -c test_conf
-	```
-
-### Option 2:
-1. Connect an HDMI connector to the gateway and a monitor. Connect a mouse and keybord to the gateway.
-2. Manually connect to your hotspot or other WiFi (not eduroam) on the Raspberry Pi.
-3. Open up command prompt on the Raspberry Pi.
-4. When you have connected to the WiFi, paste the following lines separately:
-	```
-	cd ~
-	```
-	```
-	cd ~/sx1302_hal/
-	```
-	```
-	cd packet_forwarder
-	```
-	```
-	sudo ./lora_pkt_fwd -c test_conf
-	```
-
-The packet forwarder will now be running. You should see an error relating to the GPS on the gateway being constantly output to the command prompt. This is expected. When you look at the "Gateways" tab on TTN while signed into the shared account, you should see that the "waveshare-sx1303-eedesign2" gateway has its status listed as "Connected." 
-
-The gateway needs to be connected to WiFi at all times to communicate with the server and receive information from the end nodes.
-
 <!-- ThingSpeak -->
 ## ThingSpeak
 
@@ -319,6 +267,67 @@ With that, your ThingSpeak account and text message alerts will be fully set up 
 <p align="center">
 	<img src="documentation_images/text.jpg" width = "500">
 </p>
+
+<!-- Gateway -->
+## Gateway
+
+<p align="center">
+	<img src="documentation_images/gateway.jpg" width = "350">
+</p>
+
+The SX1303 Raspberry Pi gateway has already been fully setup and initialized on TTN. To connect the end nodes to TTN, the gateway needs to be connected to the server as well, which is done by powering up the gateway and running its packet forwarder. 
+
+There are two options for connecting the gateway to the server:
+1. SSHing in
+2. Starting the packet forwarder directly on the Raspberry Pi
+
+
+### Option 1:
+1. Connect the gateway and your computer to the same WiFi network. You cannot use eduroam on the gateway, so you will either need to use your hotspot, or connect to the wifi that Dr.Eisenstadt has setup in NEB212. If you are using your hotspot, the gateway will not automatically join the first time, so you will need to directly startup the Raspberry Pi and connect to your WiFi hotspot manually, like in Option 2, so that the gateway knows your hotspot. Upon future bootups, the gateway will automatically connect to your hotspot.
+2. Once the gateway and your computer are on the same Wifi, open up "command prompt" on your computer.
+3. Paste:
+	```
+	ssh lora23@raspberrypi
+	```
+4. When prompted for the password, enter:
+	```
+	IoT4Ag
+	```
+5. When you have connected to the gateway, paste the following lines separately:
+	```
+	cd ~
+	```
+	```
+	cd ~/sx1302_hal/
+	```
+	```
+	cd packet_forwarder
+	```
+	```
+	sudo ./lora_pkt_fwd -c test_conf
+	```
+
+### Option 2:
+1. Connect an HDMI connector to the gateway and a monitor. Connect a mouse and keybord to the gateway.
+2. Manually connect to your hotspot or other WiFi (not eduroam) on the Raspberry Pi.
+3. Open up command prompt on the Raspberry Pi.
+4. When you have connected to the WiFi, paste the following lines separately:
+	```
+	cd ~
+	```
+	```
+	cd ~/sx1302_hal/
+	```
+	```
+	cd packet_forwarder
+	```
+	```
+	sudo ./lora_pkt_fwd -c test_conf
+	```
+
+The packet forwarder will now be running. You should see an error relating to the GPS on the gateway being constantly output to the command prompt. This is expected. When you look at the "Gateways" tab on TTN while signed into the shared account, you should see that the "waveshare-sx1303-eedesign2" gateway has its status listed as "Connected." 
+
+The gateway needs to be connected to WiFi at all times to communicate with the server and receive information from the end nodes.
 
 <!-- Operation -->
 ## Operation
