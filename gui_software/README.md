@@ -51,4 +51,6 @@ The GUI was created with scalability in mind, allowing future teams to easily ad
 1. Updating the "Device_Lookup" dictionary to reflect the new quantity of devices to be displayed, along with their corresponding ThingSpeak channel IDs. Of course, this necessitates creating new TTN applications and ThingSpeak channels for each additional device and configuring them accordingly (payload formatters and webhooks).
 2. Updating the "values" list to reflect the new device names within the "Device_Lookup" dictionary.
 
+![](documentation_images/scale.png)
+
 The GUI code has been extensively commented so that it may be added to or used as a model for future LoRaWAN team implementations.
