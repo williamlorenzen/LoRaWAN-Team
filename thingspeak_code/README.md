@@ -2,7 +2,7 @@
 
 ## Alert
 
-The Send_Alert file contains the code that should be pasted into a new MATLAB Analysis in ThingSpeak. After the directions are followed in the ThingSpeak section of the main branch's README, this code will be triggered whenever any React on the ThingSpeak account is triggered.
+The Send_Alert file contains the code that should be pasted into a new MATLAB Analysis in ThingSpeak. After the directions are followed in the ThingSpeak section of the main branch's README, this code will be run whenever any React on the ThingSpeak account is triggered.
 
 This code then reads the fields associated with each emergency flag on the devices, and if a particular flag is equal to 1, a corresponding email alert is sent. If the emergency flag of an end node is detected as being "1," that end node's current GPS location is extracted and included in the email alert.
 
@@ -24,7 +24,7 @@ An aspect of our project that was not fully realized was the “Out of Bounds”
 
 This out of bounds check was done in ThingSpeak for the purpose of utilizing a React that could send notifications, however, because there are a limited number of ThingSpeak writes that can be performed in a short period of time, our implementation was ultimately unsuccessful. This ThingSpeak limitation, among the other limitations of ThingSpeak’s processing capabilities, could be circumvented by having the out of bounds check be performed in the Python GUI code. To configure a React for this out of bounds flag, exploration is needed in sending data from Python back to a specified ThingSpeak channel field by using the ThingSpeak API. 
 
-The code that that implements the boundary check was designed to be integrated with the ThingSpeak_Plotting code that was previously described. The boundary check is still completed within the code, but any "thingSpeakWrite" functions that alter field 6 of a channel have been commented out to avoid the MATLAB errors that result from too many writes occurring within a time window.
+The code that alters the boundary status flag was designed to be integrated with the ThingSpeak_Plotting code that was previously described. The boundary check is still completed within the code, but any "thingSpeakWrite" functions that alter field 6 of a channel have been commented out to avoid the MATLAB errors that result from too many writes occurring within an allotted time window. This "thingSpeakWrite" limitation may be circumvented by upgrading to another ThingSpeak license, but I do not think that thingSpeakWrite functionality is important enough to warrant the extra cost.
 
 
 
