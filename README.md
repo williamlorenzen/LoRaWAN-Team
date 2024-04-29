@@ -13,7 +13,32 @@
   </p>
 </p>
 
-<!-- Table of Contents -->
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+
+## Table of Contents
+- [Background](#background)
+  - [LoRaWAN Overview](#lorawan-overview)
+  - [Problem Overview](#problem-overview)
+  - [LoRaWAN as a Solution](#lorawan-as-a-solution)
+- [System Architecture](#system-architecture)
+- [TheThingsNetwork](#thethingsnetwork)
+- [Gateway](#gateway)
+  - [Option 1](#option-1)
+  - [Option 2](#option-2)
+- [ThingSpeak](#thingspeak)
+  - [Reacts](#reacts)
+- [Operation](#operation)
+  - [End Node](#end-node)
+  - [GPS Operation](#gps-operation)
+  - [Bluetooth Uplink Communication](#bluetooth-uplink-communication)
+  - [Downlink Communication](#downlink-communication)
+  - [Farm Communication System and Future Work](#farm-communication-system-and-future-work)
+- [Python GUI](#python-gui)
+- [Authors](#authors)
+- [Acknowledgements](#acknowledgements)
+</details>
 
 <!-- Background -->
 ## Background
@@ -38,7 +63,7 @@ The agricultural sector is recognized as one of the most hazardous industries in
 
 Given the limitations of conventional wireless communications like cellular and WiFi—namely their high cost and inadequate coverage in rural settings—LoRaWAN presents a viable alternative. Its low-cost, long-range capabilities allow for communication up to tens of kilometers in open conditions, addressing critical issues within the agricultural industry. 
 
-To confront the safety and security concerns in the agricultural sector, our group developed a LoRaWAN-based end node that works as a personal emergency button as well as an asset tracker. Containing a GPS module, the end node collects the real time GPS coordinates of the end node and sends it in uplink messages to the server, along with other end node data, including the emergency status of the device, the battery voltage, and unique message codes that can be sent by field workers. Additionally, a Python application was created that will allow farm managers to view the real time GPS locations of the end nodes on a geolocation map, as well as the rest of the end node data. To ensure quick responses to emergencies, we have configured the server to send email and text notifications to relevant parties whenever the emergency button on the end node has been pressed. 
+To confront the safety and security concerns in the agricultural sector, our group developed a LoRaWAN-based end node that works as a personal emergency button as well as an asset tracker. Containing a GPS module, the end node collects its real time GPS coordinates and sends it in uplink messages to the server, along with other end node data, including the emergency status of the device, the battery voltage, and unique message codes that can be sent by field workers. Additionally, a Python application was created that will allow farm managers to view the real time GPS locations of the end nodes on a geolocation map, as well as the rest of the end node data. To ensure quick responses to emergencies, we have configured the server to send email and text notifications to relevant parties whenever the emergency button on the end node has been pressed. 
 
 <!-- System Architecture -->
 ## System Architecture
@@ -152,7 +177,7 @@ The combination of a ThingSpeak webhook and the returning of fields in the paylo
 	<img src="documentation_images/thingspeak.png" width = "350">
 </p>
 
-With that, an end node can be been configured on TTN. When a new end node is being added to the system, a new application will have to be created, the end device registered, the relevant Javascript formatter code pasted into into payload formatter, a new ThingSpeak channel created, and the webhook to the new channel established.
+With that, an end node can be been configured on TTN. When a new end node is being added to the system, a new application will have to be created, the end device registered, the relevant Javascript formatter code pasted into the payload formatter, a new ThingSpeak channel created, and the webhook to the new channel established.
 
 <!-- Gateway -->
 ## Gateway
@@ -215,6 +240,12 @@ The packet forwarder will now be running. You should see an error relating to th
 
 The gateway needs to be connected to WiFi at all times to communicate with the server and receive information from the end nodes.
 
+<!-- ThingSpeak -->
+## ThingSpeak
+
+### Reacts
+
+
 <!-- Operation -->
 ## Operation
 
@@ -225,12 +256,16 @@ This project has two primary end users:
 
 Each of these components have numerous use cases and were designed to be user friendly.
 
+
 ### End Node
 
 The end node can be powered on by pressing the power switch - a round rocker switch embedded in the device's waterproof enclosure. The green status LED will turn on to indicate that the device is powered. The end user can then interact with the device by using the three buttons that are also embedded in the side of the enclosure. These buttons are:
-	- Emergency Button (red) - used to send emergency signal to server, which triggers email and text 	notifications so that help can be called
-	- Select Button (blue) - used to turn the Bluetooth communication module on/off
-	- Toggle Button (green) - used to toggle the OLED display on/off
+
+- Emergency Button (red) - used to send emergency signal to server, which triggers email and text notifications so that help can be called
+
+- Select Button (blue) - used to turn the Bluetooth communication module on/off
+
+- Toggle Button (green) - used to toggle the OLED display on/off
 
 <p align="center">
 	<img src="documentation_images/node.png">
@@ -240,15 +275,19 @@ The **Toggle Button** can be pressed once to make the current longitude, latitud
 
 The **Select Button** can be pressed once to turn Bluetooth communication on, which results in a corresponding message being displayed on the OLED. When the Select button is pressed again, Bluetooth communication is turned off and, again, a corresponding message is displayed on the OLED. Bluetooth communication with the end node is discussed more in the [Bluetooth Communication](#bluetooth-uplink-communication) section of this README.
 
-The **Emergency Button** can be held down once to trigger a message on the OLED display asking the user if they want to send an emergency signal. If they do, they can hold down the emergency button once again, and the emergency signal will be sent in the next uplink message to the server. A message then appears on the OLED stating that the emergency signal has been sent. If the emergency button was accidentally held down once and it is not held down again within a 10 second window, then the OLED message will be cleared, and the emergency button will once again have to be held down twice to send an emergency signal. This protects against an emergency signal accidentally being sent, which triggers email and text notifications and could cause first responders to be called unnecessarily.
+The **Emergency Button** can be held down once to trigger a message on the OLED display asking the user if they want to send an emergency signal. If they do, they can hold down the emergency button once again, and the emergency signal will be sent in the next uplink message to the server. A message then appears on the OLED stating that the emergency signal has been sent. 
+
+If the emergency button was accidentally held down once and it is not held down again within a 10 second window, then the OLED message will be cleared, and the emergency button will once again have to be held down twice to send an emergency signal. This protects against an emergency signal accidentally being sent, which triggers email and text notifications and could cause first responders to be called unnecessarily.
 
 A video of the end node button's functionalities can be found [here](https://www.youtube.com/watch?v=o7ewifo6IbQ&t=4s). A video of the emergency button functionality and its interaction with TTN, ThingSpeak, and the Python GUI can be found [here](https://www.youtube.com/watch?v=NjQwIZdp0Hk&t=1s).
+
 
 ### GPS Operation
 
 The device is programmed to start the GPS upon bootup, but it can take some time for the GPS to fix onto the four satellites required for the longitude and latitude to be determined. When the GPS has fixed, a green LED on the HTCC-AB02S starts to flash and the OLED displays the time that it took for the GPS to fix. The GPS remains fixed whilst the Heltec is in low power mode between uplink messages, meaning that the GPS has to only fix once upon bootup and after every time that Bluetooth communication is initiated and stopped (which is not expected to be frequent). 
 
 A video of the end node's GPS fixing and real time GPS data being sent to TTN, ThingSpeak, and the Python GUI can be found [here](https://www.youtube.com/watch?v=rXeL1cVMSls&t=5s). Emergency button functionality was once again demonstrated in this video. 
+
 
 ### Bluetooth Uplink Communication
 
@@ -284,7 +323,7 @@ The end node contains an [Adafruit Bluetooth Low Energy module](https://www.adaf
 
 A video of the Bluetooth connection, interfacing, and the resulting messages on the Python GUI can be found [here](https://www.youtube.com/watch?v=-xSc22rfDIg&t=1s).
 
-An added feature of the BLE module is that although the end user must turn BLE communication on and off in order to interface with the device, the module is always connected to the end node's power supply, meaning that the BLE beacons constantly beacons while the end node is turned on. This can allow agricultural workers to detect when they are near particular assets by monitoring the names of the Bluetooth beacons that appear in the BluefruitConnect App, which can make it easier for them to check that asset off as being in inventory. 
+An added feature of the BLE module is that although the end user must turn BLE communication on and off in order to interface with the device, the module is always connected to the end node's power supply, meaning that the BLE constantly beacons while the end node is turned on. This can allow agricultural workers to detect when they are near particular assets by monitoring the names of the Bluetooth beacons that appear in the BluefruitConnect App, which can make it easier for them to check that asset off as being in inventory. 
 
 <p align="center">
 	<img src="documentation_images/ble.png" width = "400">
@@ -326,15 +365,18 @@ We are using Class A devices, meaning that after every uplink message, there are
 
 A video of the downlink message process and the corresponding OLED displays can be found [here](https://www.youtube.com/watch?v=OvLeOCoEfU0).
 
-### Enhanced Farm Communication Systems and Future Work
+### Farm Communication System and Future Work
 
 The Bluetooth uplink messages and TTN downlink messages can facilitate communication between field workers and managers via LoRaWAN in locations that do not have cellular connection. For example, a field worker could use their phone to send the code "water" to the end node, which would show up in the Python GUI as "In urgent need of water" in the corresponding device's message box. The manager could see this, identify the current GPS coordinates of that end node, and have another worker drive to the end node's location to provide the worker with water. The manager could send a downlink message corresponding to "We are on our way" to the respective end node so that the worker would know that help is coming. 
 
 Additionally, either Bluetooth codes or downlink codes could be used to control many other future features of the end node, whether that be actuating motors or turning on additional sensors for environmental monitoring or equipment diagnostics, providing a scalable and versatile tool for agricultural management. A vibration motor could be added to the end node, which could be triggered when a downlink message is received, notifying nearby workers to look at the OLED display to see what the manager sent. 
 
-The BLE module's VCC pin could be connected to a FET that is connected to the end node's battery and that is controlled by a GPIO pin, allowing the BLE module to be turned on and off through software. This would not only make the end node more power efficient by not having the BLE module powered at all times, but the end node could be configured so that if a particular downlink code was received, the BLE would remain on until a different downlink message code was received that told it to power off. This could allow a farm manager to tell particular end nodes to beacon Bluetooth signals with the names of the assets that they are attached to, which would allow a farm worker to walk around with the BluefruitConnect open on inventory day, view all the nearby beacons, and mark these assets as being in inventory, which could quicken the lengthy and tedious inventory process. Perhaps then the farm worker could connect to the BLEs of the nearby beaconing devices, send a code word corresponding to inventory ("inven"), and the corresponding device's message box would appear as being "In Inventory" in the Python GUI, which could be seen by the agricultural manager.
+The BLE module's VCC pin could be connected to a FET that is connected to the end node's battery and that is controlled by a GPIO pin, allowing the BLE module to be turned on and off through software. This would not only make the end node more power efficient by not having the BLE module powered at all times, but the end node could be configured so that if a particular downlink code was received, the BLE would remain on until a different downlink message code was received that told it to power off. 
+
+This could allow a farm manager to tell particular end nodes to beacon Bluetooth signals with the names of the assets that they are attached to, which would allow a farm worker to walk around with the BluefruitConnect open on inventory day, view all the nearby beacons, and mark these assets as being in inventory, which could quicken the lengthy and tedious inventory process. Perhaps then the farm worker could connect to the BLEs of the nearby beaconing devices, send a code word corresponding to inventory ("inven"), and the corresponding device's message box would appear as being "In Inventory" in the Python GUI, which could be seen by the agricultural manager.
 
 These are just ideas, but there are many ways in which this project can be built upon to address different agricultural challenges.
+
 
 ### Python GUI
 
@@ -346,7 +388,7 @@ This is best demonstrated with a [video](https://www.youtube.com/watch?v=8F29PMx
 
 After the GUI is opened, its fields must be manually updated by clicking "Get Latest" buttons. When this is done, there is no discernible latency between the uplink message being received by TTN, the decoded data being sent to ThingSpeak, and the data being plotted and displayed on the Python GUI. This is best demonstrated in a [video](https://www.youtube.com/watch?v=JTSg13Apyt0). 
 
-In this video, we sent mock GPS data from an end node, making it look like it was traveling across the Quincy, Fl site, which can clearly be seen in the Python GUI. Note that the GUI was somewhat laggy in the video because I had to have my computer connected to my phone's hotspot whilst being SSHed into the gateway.
+In this video, we sent mock GPS data from an end node, making it look like it was traveling across the Quincy, FL site, which can clearly be seen in the Python GUI. Note that the GUI was somewhat laggy in the video because I had to have my computer connected to my phone's hotspot whilst being SSHed into the gateway.
 
 <!-- Authors -->
 ## Authors
@@ -357,6 +399,11 @@ In this video, we sent mock GPS data from an end node, making it look like it wa
 | Maria Barrera      | [maria.barrera@ufl.edu](mailto:maria.barrera@ufl.edu)   | 786-319-6846|
 | Justin Nagovskiy   | [jnagovskiy@ufl.edu](mailto:jnagovskiy@ufl.edu)         | 954-258-6993|
 
-Please reach out to William if you have any questions about the project or how/why something was done.
+Please reach out to William if you have any questions about the project.
 
 [Project Repository on GitHub](https://github.com/williamlorenzen/LoRaWAN-Team)
+
+<!-- Acknowledgements -->
+## Acknowledgements
+
+We would like to thank our senior design faculty sponsor, Dr. Eisenstadt, for his guidance on this IoT4Ag project. We would also like to thank Professor Stapleton for his help with hardware design and Dr. Small for his user interface suggestions.
