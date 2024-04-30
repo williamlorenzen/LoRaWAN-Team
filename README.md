@@ -93,8 +93,6 @@ Our system architecture is comprised of five primary components: the end nodes, 
 
 For more detailed information about each of the system's components, please see our [final report on the project](resources/LoRaWAN_Spring_2024_Final_Report.pdf).
 
-[our paper](resources/LoRaWAN_Spring_2024_Final_Report.pdf)
-
 <!-- Operation -->
 ## TheThingsNetwork
 
