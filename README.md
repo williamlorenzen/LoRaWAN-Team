@@ -79,7 +79,7 @@ To confront the safety and security concerns in the agricultural sector, our gro
 	<img src="documentation_images/architecture.png" height="600">
 </p>
 
-Our system architecture is comprised of of five primary components: the end nodes, the gateway, TheThingsNetwork, ThingSpeak, and a Python GUI. Please note that we refer to TheThingsStack, our network server, as TheThingsNetwork (TTN) in our documentation.
+Our system architecture is comprised of five primary components: the end nodes, the gateway, TheThingsNetwork, ThingSpeak, and a Python GUI. Please note that we refer to TheThingsStack, our network server, as TheThingsNetwork (TTN) in our documentation.
 
 1. The end nodes are waterproof devices that are based around the [HTCC-AB02S](https://heltec.org/project/htcc-ab02s/), a development board that supports LoRaWAN communication and contains an Air530Z GPS and OLED display, making it optimal for our application. Please refer to the [hardware](hardware/) and [heltec_software](heltec_software/) folders, which each contain their own README files, for more information about the design of the end node.
 
@@ -90,6 +90,10 @@ Our system architecture is comprised of of five primary components: the end node
 4. ThingSpeak is our application server, where the data received from TTN is displayed and processed, allowing alerts to be triggered when an emergency signal is sent by an end node. Originally, we intended for ThingSpeak to act as the platform on which farm managers could view end node data and GPS locations, but due to limitations that are described in our report, we decided to develop a Python GUI to serve this purpose instead. The [ThingSpeak API](https://thingspeak.readthedocs.io/en/latest/api.html) allowed us to extract our end node data from ThingSpeak and use it in our GUI. ThingSpeak is discussed in greater detail in the [ThingSpeak section](#thingspeak) and [thingspeak_code](thingspeak_code/) folder.
 
 5. The Python GUI extracts data from ThingSpeak, generating a fully interactive map displaying various end node locations and paths, as well as presenting end node data such as emergency status, battery charge, messages, and time since the last uplink message was received, all within a single interface. Please refer to the [gui_software](gui_software/) folder, which contains its own README file, for more information about the Python GUI.
+
+For more detailed information about each of the system's components, please see our [final report on the project](resources/LoRaWAN_Spring_2024_Final_Report.pdf).
+
+[our paper](resources/LoRaWAN_Spring_2024_Final_Report.pdf)
 
 <!-- Operation -->
 ## TheThingsNetwork
