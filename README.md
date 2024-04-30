@@ -492,4 +492,4 @@ Project Repository on GitHub: https://github.com/williamlorenzen/LoRaWAN-Team
 <!-- Acknowledgements -->
 ## Acknowledgements
 
-We would like to thank our senior design faculty sponsor, Dr. Eisenstadt, for his guidance on this IoT4Ag project. We would also like to thank Professor Stapleton for his help with hardware design and Dr. Small for his user interface suggestions.
+We would like to thank our senior design faculty sponsor, Dr. Eisenstadt, for his guidance on this IoT4Ag project. We would also like to thank Professor Mike Stapleton for his help with hardware design, Dr. Ian Small for his user interface suggestions, and Eric Liebner for his help with the enclosure and parts.
